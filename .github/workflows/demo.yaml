@@ -1,0 +1,17 @@
+name: Github Actions Demo
+
+on: [push]
+
+jobs:
+  Explore-Gitea-Actions:
+    runs-on: ubuntu-lastest
+
+    steps:
+      - name: echo mydomianname
+        run: echo "codepzj.cn"
+      - uses: actions/checkout@v3
+      # 安装nodejs
+      - name: install nodejs
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: "20.12.0"
