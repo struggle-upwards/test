@@ -1,17 +1,25 @@
-name: Github Actions Demo
+name: Go
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  Explore-Gitea-Actions:
-    runs-on: ubuntu-latest
 
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: echo mydomianname
-        run: echo "codepzj.cn"
-      - uses: actions/checkout@v3
-      # 安装nodejs
-      - name: install nodejs
-        uses: actions/setup-node@v3.4.1
-        with:
-          node-version: "20.12.0"
+    - uses: actions/checkout@v4
+
+    - name: 安装go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22'
+
+    - name: 对go的代码进行打包
+      run: go build -v ./...
+
+    - name: 对go的代码进行测试
+      run: go test -v ./...
